@@ -100,12 +100,14 @@ extension View {
 
     /// Title text in the navigation bar.
     func retroTitle(_ text: String) -> some View {
-        toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(text.uppercased())
-                    .font(Retro.font(18))
-                    .foregroundStyle(Retro.glow)
+        self
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(text.uppercased())
+                        .font(Retro.font(18))
+                        .foregroundStyle(Retro.glow)
+                }
             }
-        }
     }
 }

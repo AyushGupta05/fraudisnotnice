@@ -16,8 +16,11 @@ until BASE_URL=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunnel.log | h
 done
 export BASE_URL PORT
 
+.venv/bin/python ../phone/make_shortcuts.py "$BASE_URL" > /dev/null
+
 echo
 echo "  Scam Check is reachable at  $BASE_URL"
-echo "  Put that address and your token from .env into the app's Settings."
+echo "  Put that address and the token from .env into the app's Settings."
+echo "  The two shortcuts in ../phone are rebuilt for this address. AirDrop them to the phone if it changed."
 echo
 .venv/bin/python app.py
