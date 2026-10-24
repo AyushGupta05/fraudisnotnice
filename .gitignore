@@ -1,0 +1,9 @@
+
+server/.venv/
+__pycache__/
+*.pyc
+server/*.db
+server/.env
+.DS_Store
+xcuserdata/
+DerivedData/
