@@ -1,9 +1,16 @@
-
+# Python
 server/.venv/
 __pycache__/
-*.pyc
+
+# Local data and secrets
 server/*.db
 server/.env
-.DS_Store
+server/tunnel.log
+
+# Xcode
 xcuserdata/
 DerivedData/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# macOS
+.DS_Store
