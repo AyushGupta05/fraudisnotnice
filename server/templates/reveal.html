@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scam Check</title>
+  <style>
+    body { margin: 0; padding: 28px 20px; background: #0f380f; color: #9bbc0f;
+           font: 22px/1.45 "Courier New", Courier, monospace; }
+    .box { max-width: 560px; margin: 0 auto; padding: 22px; border: 4px solid #9bbc0f; }
+    h1 { margin: 0 0 18px; font-size: 26px; letter-spacing: 2px; text-transform: uppercase; }
+    .tell { margin: 18px 0; padding: 14px; background: #9bbc0f; color: #0f380f; font-weight: bold; }
+    .type { font-size: 17px; opacity: .85; }
+    .type::after { content: "_"; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>&#9632; This was practice</h1>
+    <p>Sent to you by <strong>{{ grandchild }}</strong> through Scam Check, not by a scammer.
+       Nothing has happened to your account or your money.</p>
+    <div class="tell">The tell: {{ tell }}</div>
+    <p>Next time a text like this arrives, don't tap the link.
+       <strong>Forward it to Scam Check</strong> and you earn points.</p>
+    <p class="type">Scam type: {{ label }}</p>
+  </div>
+</body>
+</html>

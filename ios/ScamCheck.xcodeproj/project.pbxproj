@@ -1,0 +1,327 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DD105ADFB25F0125A40DF0A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90ECF6D29288B9D02BF6C90 /* Theme.swift */; };
+		38E3C30BF7A22CE93D9F3B9D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F16121A188D5178AE29D0 /* Models.swift */; };
+		50F5D669AED37DA7918C160A /* ScamCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6FA2DCC4E5AEADF108D58F /* ScamCheckApp.swift */; };
+		647D84DC41F98BCA79596C73 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8711CA2AE0759C87A4BAE9D /* TargetView.swift */; };
+		CF97C450E76DA5A32597E2D7 /* Pump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174B1E7183841448B7813F7 /* Pump.swift */; };
+		D9900DB315C49C6B165DD71D /* EnrolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E085DEF14606B25E807BA /* EnrolView.swift */; };
+		DA53F149A51EC42BC254F88A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BA50F2882EFE0E9D900826 /* SettingsView.swift */; };
+		F126D7A31F1AC455A48B4402 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0A51FEE8F37E6E060725A9 /* API.swift */; };
+		FD692573ED386E91F0445D7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD5AEDC266C09D55CBAFA0 /* HomeView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D0A51FEE8F37E6E060725A9 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		34BA50F2882EFE0E9D900826 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		358E085DEF14606B25E807BA /* EnrolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolView.swift; sourceTree = "<group>"; };
+		3E6FA2DCC4E5AEADF108D58F /* ScamCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamCheckApp.swift; sourceTree = "<group>"; };
+		7174B1E7183841448B7813F7 /* Pump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pump.swift; sourceTree = "<group>"; };
+		B39D0EFC8BDE2EBA6645DF4D /* ScamCheck.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ScamCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90ECF6D29288B9D02BF6C90 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		C8711CA2AE0759C87A4BAE9D /* TargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
+		D55890B74B7A4195D1534ADD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EEDD5AEDC266C09D55CBAFA0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F22F16121A188D5178AE29D0 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0298418BE3D6C5AE6CD736F2 = {
+			isa = PBXGroup;
+			children = (
+				12746C101FB430F4FE427BB7 /* ScamCheck */,
+				90D05E8DF8679778840503D5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		12746C101FB430F4FE427BB7 /* ScamCheck */ = {
+			isa = PBXGroup;
+			children = (
+				1D0A51FEE8F37E6E060725A9 /* API.swift */,
+				D55890B74B7A4195D1534ADD /* Info.plist */,
+				F22F16121A188D5178AE29D0 /* Models.swift */,
+				7174B1E7183841448B7813F7 /* Pump.swift */,
+				3E6FA2DCC4E5AEADF108D58F /* ScamCheckApp.swift */,
+				B90ECF6D29288B9D02BF6C90 /* Theme.swift */,
+				1DA6129D32B03DAAEF391126 /* Views */,
+			);
+			path = ScamCheck;
+			sourceTree = "<group>";
+		};
+		1DA6129D32B03DAAEF391126 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				358E085DEF14606B25E807BA /* EnrolView.swift */,
+				EEDD5AEDC266C09D55CBAFA0 /* HomeView.swift */,
+				34BA50F2882EFE0E9D900826 /* SettingsView.swift */,
+				C8711CA2AE0759C87A4BAE9D /* TargetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		90D05E8DF8679778840503D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B39D0EFC8BDE2EBA6645DF4D /* ScamCheck.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A93DC84D1421FC31F24CAA86 /* ScamCheck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B86613541BE4A8B43B2A38 /* Build configuration list for PBXNativeTarget "ScamCheck" */;
+			buildPhases = (
+				7CA4E649CB9EF55D086ADF9F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScamCheck;
+			packageProductDependencies = (
+			);
+			productName = ScamCheck;
+			productReference = B39D0EFC8BDE2EBA6645DF4D /* ScamCheck.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		86517C7E694A788FBF022A37 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A93DC84D1421FC31F24CAA86 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 29980F8E739A331F7B8A90C5 /* Build configuration list for PBXProject "ScamCheck" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0298418BE3D6C5AE6CD736F2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 90D05E8DF8679778840503D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A93DC84D1421FC31F24CAA86 /* ScamCheck */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7CA4E649CB9EF55D086ADF9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F126D7A31F1AC455A48B4402 /* API.swift in Sources */,
+				D9900DB315C49C6B165DD71D /* EnrolView.swift in Sources */,
+				FD692573ED386E91F0445D7B /* HomeView.swift in Sources */,
+				38E3C30BF7A22CE93D9F3B9D /* Models.swift in Sources */,
+				CF97C450E76DA5A32597E2D7 /* Pump.swift in Sources */,
+				50F5D669AED37DA7918C160A /* ScamCheckApp.swift in Sources */,
+				DA53F149A51EC42BC254F88A /* SettingsView.swift in Sources */,
+				647D84DC41F98BCA79596C73 /* TargetView.swift in Sources */,
+				1DD105ADFB25F0125A40DF0A /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		85CC368F8EB51BC686D809AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ScamCheck/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.ayush.scamcheck;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AEA7A6FB683FD9EE52AD7ABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		D2DE0BF28CAED68B30A7529D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ScamCheck/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.ayush.scamcheck;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		EB243DC451BF3508C8C60EB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		29980F8E739A331F7B8A90C5 /* Build configuration list for PBXProject "ScamCheck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB243DC451BF3508C8C60EB7 /* Debug */,
+				AEA7A6FB683FD9EE52AD7ABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		55B86613541BE4A8B43B2A38 /* Build configuration list for PBXNativeTarget "ScamCheck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85CC368F8EB51BC686D809AC /* Debug */,
+				D2DE0BF28CAED68B30A7529D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 86517C7E694A788FBF022A37 /* Project object */;
+}

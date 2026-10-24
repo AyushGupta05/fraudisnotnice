@@ -1,0 +1,30 @@
+# Xcode project definition. Regenerate the .xcodeproj with:  xcodegen generate
+name: ScamCheck
+options:
+  bundleIdPrefix: dev.ayush
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    CODE_SIGN_STYLE: Automatic
+targets:
+  ScamCheck:
+    type: application
+    platform: iOS
+    sources: [ScamCheck]
+    info:
+      path: ScamCheck/Info.plist
+      properties:
+        CFBundleDisplayName: Scam Check
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIUserInterfaceStyle: Dark
+        LSApplicationQueriesSchemes: [shortcuts]
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ayush.scamcheck
+        TARGETED_DEVICE_FAMILY: "1"
