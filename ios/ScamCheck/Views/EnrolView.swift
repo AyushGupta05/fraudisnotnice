@@ -50,15 +50,11 @@ struct EnrolView: View {
             Field("Your name", text: $form.grandchild, prompt: "Ayush")
             Field("What they call you", text: $form.nickname, prompt: "Jamie")
 
-            Heading(text: "Waking hours")
-            Stepper("From \(form.wakeHour):00", value: $form.wakeHour, in: 5...12)
-            Stepper("Until \(form.sleepHour):00", value: $form.sleepHour, in: 17...23)
-
             Button(busy ? "Sending" : "Send code") { Task { await enrol() } }
                 .buttonStyle(RetroButtonStyle())
                 .disabled(busy || !form.isComplete)
                 .padding(.top, 8)
-            Text("They get a text with a six-digit code. Reading it back is their consent to practice texts.")
+            Text("They get a text with a code. Reading it back is their yes.")
                 .font(Retro.font(12, weight: .regular))
                 .foregroundStyle(Retro.ink)
         }
@@ -66,10 +62,8 @@ struct EnrolView: View {
 
     private func codeStep(for target: Target) -> some View {
         Group {
-            Text("A code is queued for \(target.name). Send the queued texts, then type the code they read back.")
+            Text("A code has been texted to \(target.name). Type what they read back.")
                 .retroBox()
-            Button("Send queued texts") { openURL(Pump.url) }
-                .buttonStyle(RetroButtonStyle(filled: false))
             Field("Six-digit code", text: $code, prompt: "123456")
                 .keyboardType(.numberPad)
             Button(busy ? "Checking" : "Confirm") { Task { await verify(target) } }
@@ -80,7 +74,7 @@ struct EnrolView: View {
 
     private func enrol() async {
         guard let api = API.configured else {
-            error = "Set the server in settings first."
+            error = "Add the server under SET first."
             return
         }
         busy = true
@@ -88,6 +82,7 @@ struct EnrolView: View {
         do {
             enrolled = try await api.enrol(form)
             error = nil
+            openURL(Pump.url)
         } catch {
             self.error = error.localizedDescription
         }

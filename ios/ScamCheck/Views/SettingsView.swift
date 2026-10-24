@@ -12,10 +12,10 @@ struct SettingsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 Heading(text: "Server")
-                Field("Address printed by run.sh", text: $serverURL, prompt: "https://....trycloudflare.com")
+                Field("Address", text: $serverURL, prompt: "https://....trycloudflare.com")
                     .keyboardType(.URL)
                     .textInputAutocapitalization(.never)
-                Field("Token from server/.env", text: $token, prompt: "")
+                Field("Token", text: $token, prompt: "")
                     .textInputAutocapitalization(.never)
 
                 Heading(text: "Family to alert")
@@ -34,11 +34,6 @@ struct SettingsView: View {
                 Button("Add") { Task { await add() } }
                     .buttonStyle(RetroButtonStyle(filled: false))
                     .disabled(newName.isEmpty || newPhone.isEmpty)
-
-                Heading(text: "Phone shortcuts")
-                Text("Two automations on this phone do the texting. \"\(Pump.shortcutName)\" sends what the server has queued, and the message automation posts replies back. Both live in the Shortcuts app.")
-                    .font(Retro.font(12, weight: .regular))
-                    .foregroundStyle(Retro.ink)
 
                 if let error {
                     Text(error).foregroundStyle(Retro.ink)

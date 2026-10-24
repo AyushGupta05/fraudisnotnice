@@ -22,6 +22,9 @@ targets:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UIUserInterfaceStyle: Dark
         LSApplicationQueriesSchemes: [shortcuts]
+        CFBundleURLTypes:
+          - CFBundleURLName: dev.ayush.scamcheck
+            CFBundleURLSchemes: [scamcheck]
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
     settings:

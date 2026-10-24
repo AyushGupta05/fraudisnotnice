@@ -4,14 +4,13 @@ struct HomeView: View {
     @State private var targets: [Target] = []
     @State private var error: String?
     @State private var enrolling = false
-    @Environment(\.openURL) private var openURL
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if API.configured == nil {
-                        Text("Set the server address and token under SET (top right) to begin.")
+                        Text("Add the server address and token under SET.")
                             .retroBox()
                     } else if targets.isEmpty {
                         Text("Nobody enrolled yet.")
@@ -28,13 +27,8 @@ struct HomeView: View {
                         Text(error).foregroundStyle(Retro.ink)
                     }
 
-                    Button("Enrol a judge") { enrolling = true }
+                    Button("Enrol someone") { enrolling = true }
                         .buttonStyle(RetroButtonStyle())
-                    Button("Send queued texts") { openURL(Pump.url) }
-                        .buttonStyle(RetroButtonStyle(filled: false))
-                    Text("Drills, codes and alerts queue on the server. The \(Pump.shortcutName) shortcut on this phone sends them.")
-                        .font(Retro.font(12, weight: .regular))
-                        .foregroundStyle(Retro.ink)
                 }
                 .padding(16)
             }

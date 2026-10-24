@@ -16,6 +16,7 @@ The server address is baked into both, so rerun this when the tunnel URL changes
 import plistlib
 import subprocess
 import sys
+import time
 import uuid
 from pathlib import Path
 
@@ -139,11 +140,22 @@ def write_signed(name, actions, takes_input):
     signed = HERE / f"{name}.shortcut"
     with unsigned.open("wb") as handle:
         plistlib.dump(workflow(actions, takes_input), handle)
-    subprocess.run(
-        ["shortcuts", "sign", "--mode", "anyone", "--input", str(unsigned), "--output", str(signed)], check=True
-    )
-    unsigned.unlink()
+    try:
+        sign(unsigned, signed)
+    finally:
+        unsigned.unlink(missing_ok=True)
     return signed
+
+
+def sign(unsigned, signed):
+    """Sign with the system tool. It occasionally fails for no reason while Shortcuts.app is busy, so try twice."""
+    command = ["shortcuts", "sign", "--mode", "anyone", "--input", str(unsigned), "--output", str(signed)]
+    for attempt in (1, 2):
+        result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode == 0:
+            return
+        time.sleep(1)
+    sys.exit(f"shortcuts sign failed: {result.stderr.strip() or result.stdout.strip()}")
 
 
 def main():

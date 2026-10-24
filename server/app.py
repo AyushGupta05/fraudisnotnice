@@ -177,7 +177,7 @@ def show_target(target_id):
 @app.post("/targets/<int:target_id>/send-now")
 @protected
 def send_now(target_id):
-    """The demo button: a drill right now, waking hours or not."""
+    """A drill right now, waking hours or not."""
     target = target_or_404(target_id)
     if target["status"] != "active":
         abort(400, "this person has not agreed yet")
@@ -189,7 +189,7 @@ def send_now(target_id):
 @app.delete("/targets/<int:target_id>")
 @protected
 def forget_target(target_id):
-    """Wipe someone completely, for judges who have finished playing."""
+    """Wipe someone completely."""
     target = target_or_404(target_id)
     db().execute("DELETE FROM drills WHERE target_id = ?", (target_id,))
     db().execute("DELETE FROM inbound WHERE from_phone = ?", (target["phone"],))

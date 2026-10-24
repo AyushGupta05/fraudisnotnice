@@ -36,7 +36,7 @@ struct TargetView: View {
             Text("IMMUNITY").font(Retro.font(12)).foregroundStyle(Retro.ink)
             Text(Retro.percent(target.immunity)).font(Retro.font(44))
             Text(Retro.meter(target.immunity)).font(Retro.font(18))
-            Text("STREAK \(target.streak)   POINTS \(target.points)   EVERY ~\(max(target.intervalHours / 24, 1))D")
+            Text("STREAK \(target.streak)   POINTS \(target.points)")
                 .font(Retro.font(12))
                 .foregroundStyle(Retro.ink)
             if let waiting = target.waitingDrill {
@@ -92,14 +92,9 @@ struct TargetView: View {
 
     private func actions(_ target: Target) -> some View {
         Group {
-            if target.isActive {
-                if target.waitingDrill == nil {
-                    Button("Send drill now") { Task { await sendNow() } }
-                        .buttonStyle(RetroButtonStyle())
-                } else {
-                    Button("Send queued texts") { openURL(Pump.url) }
-                        .buttonStyle(RetroButtonStyle())
-                }
+            if target.isActive && target.waitingDrill == nil {
+                Button("Send a drill now") { Task { await sendNow() } }
+                    .buttonStyle(RetroButtonStyle())
             }
             Button("Forget this person") { confirmingForget = true }
                 .buttonStyle(RetroButtonStyle(filled: false))
@@ -122,6 +117,7 @@ struct TargetView: View {
         do {
             _ = try await api.sendNow(target: targetID)
             await load()
+            openURL(Pump.url)
         } catch {
             self.error = error.localizedDescription
         }

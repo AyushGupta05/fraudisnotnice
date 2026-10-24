@@ -8,7 +8,8 @@ if [ -f .env ]; then
 fi
 PORT="${PORT:-5055}"
 
-cloudflared tunnel --url "http://localhost:$PORT" --no-autoupdate > tunnel.log 2>&1 &
+# http2 rather than the default quic: many venue and university networks block the UDP port quic needs.
+cloudflared tunnel --url "http://localhost:$PORT" --protocol http2 --no-autoupdate > tunnel.log 2>&1 &
 trap 'kill %1 2>/dev/null' EXIT
 
 until BASE_URL=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunnel.log | head -1); [ -n "$BASE_URL" ]; do
@@ -16,7 +17,18 @@ until BASE_URL=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' tunnel.log | h
 done
 export BASE_URL PORT
 
-.venv/bin/python ../phone/make_shortcuts.py "$BASE_URL" > /dev/null
+for _ in $(seq 20); do
+  grep -q "Registered tunnel connection" tunnel.log && break
+  sleep 1
+done
+if ! grep -q "Registered tunnel connection" tunnel.log; then
+  echo
+  echo "  The tunnel has an address but cannot connect: this network blocks outbound port 7844."
+  echo "  Switch to your phone's hotspot or another network and run this again."
+fi
+
+.venv/bin/python ../phone/make_shortcuts.py "$BASE_URL" > /dev/null \
+  || echo "  Could not rebuild the shortcuts. Run: python3 phone/make_shortcuts.py $BASE_URL"
 
 echo
 echo "  Scam Check is reachable at  $BASE_URL"
