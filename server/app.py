@@ -94,6 +94,7 @@ def summary(target):
         "streak": target["streak"],
         "immunity": round(100 * passed / attempts) if attempts else None,
         "interval_hours": round(target["interval_hours"]),
+        "window_hours": engine.RESPONSE_WINDOW.total_seconds() / 3600,
         "next_due_at": target["next_due_at"],
         "waiting_drill": drill_view(waiting) if waiting else None,
     }
@@ -114,6 +115,7 @@ def drill_view(drill):
         "status": drill["status"],
         "body": drill["body"],
         "sent_at": drill["sent_at"],
+        "passes_at": store.iso(store.parse(drill["sent_at"]) + engine.RESPONSE_WINDOW) if drill["status"] == "pending" else None,
         "resolved_at": drill["resolved_at"],
     }
 
@@ -159,6 +161,16 @@ def verify():
     if target["status"] == "pending" and not engine.verify(db(), target, str(data.get("code", "")).strip(), store.now()):
         abort(400, "wrong code")
     return jsonify(summary(target_or_404(target["id"])))
+
+
+@app.post("/targets/<int:target_id>/resend-code")
+@protected
+def resend_code(target_id):
+    target = target_or_404(target_id)
+    if target["status"] != "pending":
+        abort(400, "this person has already agreed")
+    engine.resend_code(db(), target, store.now())
+    return jsonify(summary(target))
 
 
 @app.get("/targets")

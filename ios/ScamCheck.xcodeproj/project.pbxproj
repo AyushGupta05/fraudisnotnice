@@ -14,10 +14,12 @@
 		D9900DB315C49C6B165DD71D /* EnrolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E085DEF14606B25E807BA /* EnrolView.swift */; };
 		DA53F149A51EC42BC254F88A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BA50F2882EFE0E9D900826 /* SettingsView.swift */; };
 		F126D7A31F1AC455A48B4402 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0A51FEE8F37E6E060725A9 /* API.swift */; };
+		F66DA038F5B21449A8FBE52A /* DrillRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190E19DD286D62D6CE44367D /* DrillRow.swift */; };
 		FD692573ED386E91F0445D7B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDD5AEDC266C09D55CBAFA0 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190E19DD286D62D6CE44367D /* DrillRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillRow.swift; sourceTree = "<group>"; };
 		1D0A51FEE8F37E6E060725A9 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		34BA50F2882EFE0E9D900826 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		358E085DEF14606B25E807BA /* EnrolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		1DA6129D32B03DAAEF391126 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				190E19DD286D62D6CE44367D /* DrillRow.swift */,
 				358E085DEF14606B25E807BA /* EnrolView.swift */,
 				EEDD5AEDC266C09D55CBAFA0 /* HomeView.swift */,
 				34BA50F2882EFE0E9D900826 /* SettingsView.swift */,
@@ -130,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F126D7A31F1AC455A48B4402 /* API.swift in Sources */,
+				F66DA038F5B21449A8FBE52A /* DrillRow.swift in Sources */,
 				D9900DB315C49C6B165DD71D /* EnrolView.swift in Sources */,
 				FD692573ED386E91F0445D7B /* HomeView.swift in Sources */,
 				38E3C30BF7A22CE93D9F3B9D /* Models.swift in Sources */,

@@ -50,6 +50,15 @@ def enrol(db, details, at):
     return cursor.lastrowid
 
 
+def resend_code(db, target, at):
+    """Text the consent code again to someone who has not confirmed yet."""
+    send_text(
+        db, target["phone"],
+        f"Scam Check: your code is {target['otp']}. Tell {target['grandchild']} the code to agree to practice scam texts.",
+        "otp", at,
+    )
+
+
 def verify(db, target, code, at):
     """Activate a target whose consent code matches. Returns True on success."""
     if code != target["otp"]:

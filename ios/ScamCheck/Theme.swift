@@ -11,15 +11,45 @@ enum Retro {
         .system(size: size, weight: weight, design: .monospaced)
     }
 
-    /// A ten-block meter like ▮▮▮▮▮▮▯▯▯▯ for a percentage, or dots when there is no score yet.
-    static func meter(_ percent: Int?) -> String {
-        guard let percent else { return String(repeating: "·", count: 10) }
-        let filled = Int((Double(percent) / 10).rounded())
-        return String(repeating: "▮", count: filled) + String(repeating: "▯", count: 10 - filled)
-    }
-
     static func percent(_ value: Int?) -> String {
         value.map { "\($0)%" } ?? "--"
+    }
+}
+
+/// A chunky horizontal bar. `fraction` 0...1, or nil for "nothing to show yet".
+struct Bar: View {
+    let fraction: Double?
+    var height: CGFloat = 14
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle().fill(Retro.shadow.opacity(0.5))
+                if let fraction {
+                    Rectangle()
+                        .fill(Retro.glow)
+                        .frame(width: geometry.size.width * fraction)
+                }
+            }
+            .overlay(Rectangle().stroke(Retro.ink, lineWidth: 2))
+        }
+        .frame(height: height)
+    }
+}
+
+/// A small uppercase label, filled for good news.
+struct Badge: View {
+    let text: String
+    var filled = false
+
+    var body: some View {
+        Text(text.uppercased())
+            .font(Retro.font(11))
+            .padding(.horizontal, 6)
+            .padding(.vertical, 3)
+            .background(filled ? Retro.glow : .clear)
+            .foregroundStyle(filled ? Retro.screen : Retro.glow)
+            .overlay(Rectangle().stroke(Retro.glow, lineWidth: 2))
     }
 }
 
@@ -64,6 +94,7 @@ struct Field: View {
 
 struct RetroButtonStyle: ButtonStyle {
     var filled = true
+    @Environment(\.isEnabled) private var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -74,7 +105,7 @@ struct RetroButtonStyle: ButtonStyle {
             .background(filled ? Retro.glow : Retro.screen)
             .foregroundStyle(filled ? Retro.screen : Retro.glow)
             .overlay(Rectangle().stroke(Retro.glow, lineWidth: 3))
-            .opacity(configuration.isPressed ? 0.6 : 1)
+            .opacity(configuration.isPressed ? 0.6 : isEnabled ? 1 : 0.35)
     }
 }
 

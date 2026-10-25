@@ -26,6 +26,9 @@ struct API {
         try await send("POST", "verify", Verification(targetId: id, code: code))
     }
     func sendNow(target id: Int) async throws -> Drill { try await send("POST", "targets/\(id)/send-now") }
+    func resendCode(target id: Int) async throws -> Target { try await send("POST", "targets/\(id)/resend-code") }
+    func health() async throws -> Health { try await send("GET", "health") }
+    struct Health: Decodable { let ok: Bool; let linkBase: String }
     func forget(target id: Int) async throws { let _: Deleted = try await send("DELETE", "targets/\(id)") }
 
 

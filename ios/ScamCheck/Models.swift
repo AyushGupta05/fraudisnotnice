@@ -11,6 +11,7 @@ struct Target: Codable, Identifiable {
     let streak: Int
     let immunity: Int?          // percentage of resolved drills left untouched
     let intervalHours: Int
+    let windowHours: Double
     let nextDueAt: Date?
     let waitingDrill: Drill?    // a drill sent and not yet answered
     let byType: [String: TypeScore]?
@@ -20,9 +21,9 @@ struct Target: Codable, Identifiable {
 
     var statusLine: String {
         switch status {
-        case "pending": "awaiting code"
+        case "pending": "no code yet"
         case "stopped": "opted out"
-        default: waitingDrill == nil ? "active" : "drill out"
+        default: waitingDrill == nil ? "protected" : "drill out"
         }
     }
 }
@@ -42,7 +43,15 @@ struct Drill: Codable, Identifiable {
     let status: String          // pending | passed | clicked
     let body: String
     let sentAt: Date
+    let passesAt: Date?         // when a pending drill becomes a pass
     let resolvedAt: Date?
+
+    /// How far a pending drill is through its window, 0 to 1.
+    func progress(at now: Date) -> Double {
+        guard let passesAt else { return 1 }
+        let total = passesAt.timeIntervalSince(sentAt)
+        return total > 0 ? min(max(now.timeIntervalSince(sentAt) / total, 0), 1) : 1
+    }
 }
 
 /// The questionnaire. Field names match what the server expects once converted to snake_case.

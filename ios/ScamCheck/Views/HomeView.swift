@@ -10,10 +10,10 @@ struct HomeView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if API.configured == nil {
-                        Text("Add the server address and token under SET.")
+                        Text("Add the server address and token under SET to begin.")
                             .retroBox()
-                    } else if targets.isEmpty {
-                        Text("Nobody enrolled yet.")
+                    } else if targets.isEmpty && error == nil {
+                        Text("Nobody enrolled yet. Enrol someone and they get a code by text.")
                             .retroBox()
                     }
 
@@ -29,6 +29,7 @@ struct HomeView: View {
 
                     Button("Enrol someone") { enrolling = true }
                         .buttonStyle(RetroButtonStyle())
+                        .disabled(API.configured == nil)
                 }
                 .padding(16)
             }
@@ -69,18 +70,29 @@ struct TargetCard: View {
     let target: Target
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text(target.name.uppercased()).font(Retro.font(17))
                 Spacer()
-                Text(target.statusLine.uppercased()).font(Retro.font(12)).foregroundStyle(Retro.ink)
+                Badge(text: target.statusLine, filled: target.waitingDrill != nil)
             }
-            Text("\(Retro.meter(target.immunity)) \(Retro.percent(target.immunity))")
-                .font(Retro.font(15))
-            Text("STREAK \(target.streak)   PTS \(target.points)")
+            HStack(spacing: 10) {
+                Bar(fraction: target.immunity.map { Double($0) / 100 })
+                Text(Retro.percent(target.immunity)).font(Retro.font(13))
+            }
+            Text(detailLine)
                 .font(Retro.font(12))
                 .foregroundStyle(Retro.ink)
         }
         .retroBox()
+    }
+
+    private var detailLine: String {
+        if target.status == "pending" { return "Waiting for them to read the code back" }
+        if let waiting = target.waitingDrill, let passesAt = waiting.passesAt {
+            return "Drill out. Pass \(passesAt.formatted(.relative(presentation: .named))) if untouched"
+        }
+        if let due = target.nextDueAt { return "Streak \(target.streak)  ·  Next drill \(due.formatted(.relative(presentation: .named)))" }
+        return "Streak \(target.streak)"
     }
 }

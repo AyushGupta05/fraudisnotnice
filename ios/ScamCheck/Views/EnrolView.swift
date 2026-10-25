@@ -61,13 +61,19 @@ struct EnrolView: View {
 
     private func codeStep(for target: Target) -> some View {
         Group {
-            Text("A code has been texted to \(target.name). Type what they read back.")
+            Text("A code has been texted to \(target.name) from SCAMCHECK. Type what they read back.")
                 .retroBox()
             Field("Six-digit code", text: $code, prompt: "123456")
                 .keyboardType(.numberPad)
             Button(busy ? "Checking" : "Confirm") { Task { await verify(target) } }
                 .buttonStyle(RetroButtonStyle())
                 .disabled(busy || code.count != 6)
+            Button("Text the code again") { Task { await resend(target) } }
+                .buttonStyle(RetroButtonStyle(filled: false))
+                .disabled(busy)
+            Text("No text? Check the number, then close this and try again from the person's page.")
+                .font(Retro.font(11))
+                .foregroundStyle(Retro.ink)
         }
     }
 
@@ -80,6 +86,18 @@ struct EnrolView: View {
         defer { busy = false }
         do {
             enrolled = try await api.enrol(form)
+            error = nil
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
+
+    private func resend(_ target: Target) async {
+        guard let api = API.configured else { return }
+        busy = true
+        defer { busy = false }
+        do {
+            _ = try await api.resendCode(target: target.id)
             error = nil
         } catch {
             self.error = error.localizedDescription
