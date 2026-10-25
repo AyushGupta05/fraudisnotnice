@@ -93,6 +93,8 @@ def normalise_phone(raw):
         digits = "+44" + digits[1:]
     elif digits.startswith("44"):
         digits = "+" + digits
+    if digits.startswith("+440"):   # "+44 (0)7700 ..." keeps the bracketed zero
+        digits = "+44" + digits[4:]
     return digits
 
 

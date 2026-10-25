@@ -8,8 +8,9 @@ struct API {
     /// nil until a server address and token have been entered in Settings.
     static var configured: API? {
         let defaults = UserDefaults.standard
-        guard let address = defaults.string(forKey: "serverURL"), let url = URL(string: address),
-              let token = defaults.string(forKey: "token"), !token.isEmpty else { return nil }
+        let address = defaults.string(forKey: "serverURL")?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let token = defaults.string(forKey: "token")?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        guard let url = URL(string: address), url.host() != nil, !token.isEmpty else { return nil }
         return API(baseURL: url, token: token)
     }
 

@@ -27,6 +27,7 @@ SCAM_WORDS = (
     "urgent", "suspended", "verify", "confirm", "click", "password", "pin", "pay",
     "new number", "nicked", "stolen",
 )
+SCAM_WORD = re.compile(r"\b(" + "|".join(map(re.escape, SCAM_WORDS)) + r")\b")   # whole words, so "won" is not "wonderful"
 STOP_WORDS = {"STOP", "STOP ALL", "UNSUBSCRIBE", "NO"}
 
 RESULTS = ("unknown_sender", "stopped", "drill_forwarded", "drill_already_counted", "real_scam", "ignored")
@@ -239,7 +240,7 @@ def reward(db, target, drill, at):
 
 def looks_like_scam(body):
     lower = body.lower()
-    return bool(URL_LIKE.search(lower)) or any(word in lower for word in SCAM_WORDS)
+    return bool(URL_LIKE.search(lower) or SCAM_WORD.search(lower))
 
 
 def alert_family(db, target, body, at):
