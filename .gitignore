@@ -15,5 +15,3 @@ DerivedData/
 # macOS
 .DS_Store
 
-# Generated shortcuts carry the token
-phone/*.shortcut

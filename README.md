@@ -1,35 +1,28 @@
 # Scam Check
 
-Practice scam texts for grandparents, so the reflex they build is "forward anything odd to the family".
-
-Three parts, no paid services:
+Practice scam texts for grandparents. The reflex it builds: never tap the link.
 
 | Folder   | What it is |
 |----------|------------|
-| `server` | Flask + SQLite. Decides when drills go out, scores forwards and clicks, serves the reveal page, alerts the family. |
-| `phone`  | Two iPhone Shortcuts. Your own phone sends the texts and posts replies back; the server never touches SMS. |
+| `server` | Flask + SQLite. Sends drills through AWS End User Messaging, serves the reveal page, keeps score. |
 | `ios`    | The SwiftUI app the grandchild uses: enrol someone, see immunity per scam type, send a drill now. |
 
 ## Run it
 
 ```bash
+aws login
 server/run.sh
 ```
 
-That opens a public tunnel, prints its address, and rebuilds the two shortcuts for it. Then:
+That opens a public tunnel and prints its address. Open `ios/ScamCheck.xcodeproj`, run on your phone,
+and paste the address and the token from `server/.env` into the app's settings.
 
-1. AirDrop `phone/*.shortcut` to your iPhone and add them.
-2. In Shortcuts on the phone, add Time of Day automations that run **Scam Check Pump**
-   (a few across the day, Run Immediately), and a Message automation for each enrolled person
-   that runs **Scam Check Inbound**.
-3. Open `ios/ScamCheck.xcodeproj`, pick your team under Signing, run on your phone.
-4. In the app's settings, paste the tunnel address and the token from `server/.env`.
-
-Email alerts are optional: fill the Gmail lines in `server/.env` with an app password.
+Texts come from the sender ID `SCAMCHECK`. While the AWS account is in the SMS sandbox, only numbers
+verified in AWS End User Messaging receive them.
 
 ## The rules
 
-- First drill lands within three days of consent. Forwarding stretches the gap by half, clicking halves it,
-  silence for 48 hours shrinks it a little. Never longer than two months.
+- A drill left untouched for 48 hours is a pass. Tapping its link is a slip, and lands on a one-line reveal.
+- The first drill lands within three days of consent. A pass stretches the gap by half, a slip halves it.
+  Never longer than two months.
 - Each drill targets the weakest scam type, untried ones first.
-- Forwarding a text that is not a drill alerts every family number: it is probably real.

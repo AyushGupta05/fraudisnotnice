@@ -31,34 +31,18 @@ CREATE TABLE IF NOT EXISTS drills (
     scam_type   TEXT NOT NULL,
     body        TEXT NOT NULL,
     tell        TEXT NOT NULL,                 -- the one-line lesson shown on the reveal page
-    status      TEXT NOT NULL,                 -- pending | forwarded | clicked | missed
+    status      TEXT NOT NULL,                 -- pending | passed | clicked
     sent_at     TEXT NOT NULL,
     resolved_at TEXT
 );
 
-CREATE TABLE IF NOT EXISTS outbox (
-    id         INTEGER PRIMARY KEY,
-    to_phone   TEXT NOT NULL,
-    body       TEXT NOT NULL,
-    kind       TEXT NOT NULL,                  -- otp | drill | reply | alert
-    status     TEXT NOT NULL,                  -- queued | sent
-    created_at TEXT NOT NULL,
-    sent_at    TEXT
-);
-
-CREATE TABLE IF NOT EXISTS family (
-    id    INTEGER PRIMARY KEY,
-    name  TEXT NOT NULL,
-    phone TEXT NOT NULL UNIQUE
-);
-
-CREATE TABLE IF NOT EXISTS inbound (
-    id          INTEGER PRIMARY KEY,
-    from_phone  TEXT NOT NULL,
-    body        TEXT NOT NULL,
-    result      TEXT NOT NULL,                 -- one of engine.RESULTS
-    drill_id    INTEGER,
-    received_at TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS texts (
+    id       INTEGER PRIMARY KEY,
+    to_phone TEXT NOT NULL,
+    body     TEXT NOT NULL,
+    kind     TEXT NOT NULL,                    -- otp | drill | reply
+    status   TEXT NOT NULL,                    -- sent | failed
+    sent_at  TEXT NOT NULL
 );
 """
 
@@ -85,7 +69,7 @@ def parse(text):
 
 
 def normalise_phone(raw):
-    """Reduce any way of writing a UK number to +447..., so a forward matches its enrolment."""
+    """Reduce any way of writing a UK number to +447..."""
     digits = re.sub(r"[^\d+]", "", raw or "")
     if digits.startswith("00"):
         digits = "+" + digits[2:]
@@ -118,13 +102,8 @@ def recent_drills(db, target_id, limit=10):
     ).fetchall()
 
 
-def family(db):
-    return db.execute("SELECT * FROM family ORDER BY id").fetchall()
-
-
-def queue(db, to_phone, body, kind, at):
-    """Put a text in the outbox for the phone to send."""
+def log_text(db, to_phone, body, kind, sent, at):
     db.execute(
-        "INSERT INTO outbox (to_phone, body, kind, status, created_at) VALUES (?, ?, ?, 'queued', ?)",
-        (to_phone, body, kind, iso(at)),
+        "INSERT INTO texts (to_phone, body, kind, status, sent_at) VALUES (?, ?, ?, ?, ?)",
+        (to_phone, body, kind, "sent" if sent else "failed", iso(at)),
     )

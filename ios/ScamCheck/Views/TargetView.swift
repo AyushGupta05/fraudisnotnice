@@ -3,7 +3,6 @@ import SwiftUI
 struct TargetView: View {
     let targetID: Int
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL
     @State private var target: Target?
     @State private var error: String?
     @State private var confirmingForget = false
@@ -40,7 +39,7 @@ struct TargetView: View {
                 .font(Retro.font(12))
                 .foregroundStyle(Retro.ink)
             if let waiting = target.waitingDrill {
-                Text("Drill out \(waiting.sentAt.formatted(.relative(presentation: .named))): \(waiting.label)")
+                Text("Drill out \(waiting.sentAt.formatted(.relative(presentation: .named))): \(waiting.label). Untouched = pass.")
                     .font(Retro.font(12))
             } else if let due = target.nextDueAt {
                 Text("Next drill \(due.formatted(.relative(presentation: .named)))")
@@ -75,7 +74,7 @@ struct TargetView: View {
                             Spacer()
                             Text(drill.status.uppercased())
                                 .font(Retro.font(12))
-                                .foregroundStyle(drill.status == "forwarded" ? Retro.glow : Retro.ink)
+                                .foregroundStyle(drill.status == "passed" ? Retro.glow : Retro.ink)
                         }
                         Text(drill.body)
                             .font(Retro.font(12, weight: .regular))
@@ -117,7 +116,6 @@ struct TargetView: View {
         do {
             _ = try await api.sendNow(target: targetID)
             await load()
-            openURL(Pump.url)
         } catch {
             self.error = error.localizedDescription
         }

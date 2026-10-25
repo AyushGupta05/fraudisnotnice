@@ -11,7 +11,6 @@
 		38E3C30BF7A22CE93D9F3B9D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F16121A188D5178AE29D0 /* Models.swift */; };
 		50F5D669AED37DA7918C160A /* ScamCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6FA2DCC4E5AEADF108D58F /* ScamCheckApp.swift */; };
 		647D84DC41F98BCA79596C73 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8711CA2AE0759C87A4BAE9D /* TargetView.swift */; };
-		CF97C450E76DA5A32597E2D7 /* Pump.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174B1E7183841448B7813F7 /* Pump.swift */; };
 		D9900DB315C49C6B165DD71D /* EnrolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358E085DEF14606B25E807BA /* EnrolView.swift */; };
 		DA53F149A51EC42BC254F88A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BA50F2882EFE0E9D900826 /* SettingsView.swift */; };
 		F126D7A31F1AC455A48B4402 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0A51FEE8F37E6E060725A9 /* API.swift */; };
@@ -23,7 +22,6 @@
 		34BA50F2882EFE0E9D900826 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		358E085DEF14606B25E807BA /* EnrolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolView.swift; sourceTree = "<group>"; };
 		3E6FA2DCC4E5AEADF108D58F /* ScamCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScamCheckApp.swift; sourceTree = "<group>"; };
-		7174B1E7183841448B7813F7 /* Pump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pump.swift; sourceTree = "<group>"; };
 		B39D0EFC8BDE2EBA6645DF4D /* ScamCheck.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ScamCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90ECF6D29288B9D02BF6C90 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		C8711CA2AE0759C87A4BAE9D /* TargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
@@ -47,7 +45,6 @@
 				1D0A51FEE8F37E6E060725A9 /* API.swift */,
 				D55890B74B7A4195D1534ADD /* Info.plist */,
 				F22F16121A188D5178AE29D0 /* Models.swift */,
-				7174B1E7183841448B7813F7 /* Pump.swift */,
 				3E6FA2DCC4E5AEADF108D58F /* ScamCheckApp.swift */,
 				B90ECF6D29288B9D02BF6C90 /* Theme.swift */,
 				1DA6129D32B03DAAEF391126 /* Views */,
@@ -136,7 +133,6 @@
 				D9900DB315C49C6B165DD71D /* EnrolView.swift in Sources */,
 				FD692573ED386E91F0445D7B /* HomeView.swift in Sources */,
 				38E3C30BF7A22CE93D9F3B9D /* Models.swift in Sources */,
-				CF97C450E76DA5A32597E2D7 /* Pump.swift in Sources */,
 				50F5D669AED37DA7918C160A /* ScamCheckApp.swift in Sources */,
 				DA53F149A51EC42BC254F88A /* SettingsView.swift in Sources */,
 				647D84DC41F98BCA79596C73 /* TargetView.swift in Sources */,

@@ -3,7 +3,6 @@ import SwiftUI
 /// Two steps: the questionnaire, then the six-digit code the person reads back.
 struct EnrolView: View {
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL
     @State private var form = Enrolment()
     @State private var enrolled: Target?
     @State private var code = ""
@@ -82,7 +81,6 @@ struct EnrolView: View {
         do {
             enrolled = try await api.enrol(form)
             error = nil
-            openURL(Pump.url)
         } catch {
             self.error = error.localizedDescription
         }

@@ -28,11 +28,6 @@ struct API {
     func sendNow(target id: Int) async throws -> Drill { try await send("POST", "targets/\(id)/send-now") }
     func forget(target id: Int) async throws { let _: Deleted = try await send("DELETE", "targets/\(id)") }
 
-    func family() async throws -> [FamilyMember] { try await send("GET", "family") }
-    func addFamily(name: String, phone: String) async throws -> [FamilyMember] {
-        try await send("POST", "family", ["name": name, "phone": phone])
-    }
-    func removeFamily(_ id: Int) async throws { let _: Deleted = try await send("DELETE", "family/\(id)") }
 
     // MARK: - Wire format
 
