@@ -1,0 +1,16 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-10-25T12:00:00Z"},
+  "lists": "css",
+  "title": "Scam Check",
+  "order": ["cover", "damage", "inoculation"],
+  "sections": {
+    "s1": {"description": "Scam Check: practice scam texts so the real ones bounce off", "start": "cover"},
+    "s2": {"description": "What the studies say about who scams hurt and how much", "start": "damage"},
+    "s3": {"description": "Inoculation theory and the evidence that a small dose builds resistance", "start": "inoculation"}
+  },
+  "faces": {
+    "instrument-sans": {"family": "Instrument Sans", "href": "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"}
+  },
+  "designSystems": []
+}
