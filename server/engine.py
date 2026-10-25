@@ -8,6 +8,7 @@ from datetime import timedelta
 from zoneinfo import ZoneInfo
 
 import mail
+import sms
 import store
 from drills import SCAM_TYPES, make_drill
 
@@ -33,6 +34,19 @@ STOP_WORDS = {"STOP", "STOP ALL", "UNSUBSCRIBE", "NO"}
 RESULTS = ("unknown_sender", "stopped", "drill_forwarded", "drill_already_counted", "real_scam", "ignored")
 
 
+# ---------------------------------------------------------------- sending texts
+
+def send_text(db, to_phone, body, kind, at):
+    """Through AWS when it is set up, otherwise into the outbox for the phone's pump shortcut."""
+    if sms.configured() and sms.send(to_phone, body):
+        db.execute(
+            "INSERT INTO outbox (to_phone, body, kind, status, created_at, sent_at) VALUES (?, ?, ?, 'sent', ?, ?)",
+            (to_phone, body, kind, store.iso(at), store.iso(at)),
+        )
+    else:
+        store.queue(db, to_phone, body, kind, at)
+
+
 # ---------------------------------------------------------------- consent
 
 def enrol(db, details, at):
@@ -47,7 +61,7 @@ def enrol(db, details, at):
             otp, START_INTERVAL_HOURS, store.iso(at),
         ),
     )
-    store.queue(
+    send_text(
         db, details["phone"],
         f"Scam Check: {details['grandchild']} would like to send you the occasional practice scam text, "
         f"so you get good at spotting the real ones. Your code is {otp}. "
@@ -68,7 +82,7 @@ def verify(db, target, code, at):
 
 def stop(db, target, at):
     db.execute("UPDATE targets SET status = 'stopped', next_due_at = NULL WHERE id = ?", (target["id"],))
-    store.queue(db, target["phone"], f"Scam Check: no problem {target['name']}, no more practice texts.", "reply", at)
+    send_text(db, target["phone"], f"Scam Check: no problem {target['name']}, no more practice texts.", "reply", at)
 
 
 # ---------------------------------------------------------------- sending drills
@@ -102,7 +116,7 @@ def send_drill(db, target, at, link_base):
         " VALUES (?, ?, ?, ?, ?, 'pending', ?)",
         (target["id"], code, scam_type, body, tell, store.iso(at)),
     )
-    store.queue(db, target["phone"], body, "drill", at)
+    send_text(db, target["phone"], body, "drill", at)
     # The next drill is scheduled when this one resolves, so park the due date until then.
     db.execute("UPDATE targets SET next_due_at = NULL WHERE id = ?", (target["id"],))
     return db.execute("SELECT * FROM drills WHERE id = ?", (cursor.lastrowid,)).fetchone()
@@ -180,7 +194,7 @@ def weakest_type(db, target_id):
 
 def handle_inbound(db, from_phone, body, at):
     """Work out what a text from a target means, act on it, and return (result, drill_id)."""
-    target = store.target_by_phone(db, from_phone)
+    target = store.target_by_phone(db, from_phone) or likely_target(db, body)
     drill = None
 
     if target is None or not body:
@@ -201,6 +215,17 @@ def handle_inbound(db, from_phone, body, at):
         (from_phone, body, result, drill["id"] if drill else None, store.iso(at)),
     )
     return result, drill["id"] if drill else None
+
+
+def likely_target(db, body):
+    """When the phone could not say who sent a text: the owner of the drill it quotes, else the only enrolled person."""
+    found = LINK_CODE.search(body)
+    if found:
+        drill = db.execute("SELECT target_id FROM drills WHERE code = ?", (found.group(1),)).fetchone()
+        if drill:
+            return store.target_by_id(db, drill["target_id"])
+    people = db.execute("SELECT * FROM targets WHERE status != 'stopped'").fetchall()
+    return people[0] if len(people) == 1 else None
 
 
 def matching_drill(db, target_id, body):
@@ -229,7 +254,7 @@ def reward(db, target, drill, at):
         return "drill_already_counted"
     updated = resolve(db, drill, "forwarded", at)
     gained = updated["points"] - target["points"]
-    store.queue(
+    send_text(
         db, target["phone"],
         f"Scam Check: well spotted {target['name']}! That was practice from {target['grandchild']}. "
         f"+{gained} points, streak {updated['streak']}.",
@@ -250,9 +275,9 @@ def alert_family(db, target, body, at):
         f"It is not one of our drills, so treat it as real. Please call {target['name']}.\n\n{body[:400]}"
     )
     for member in store.family(db):
-        store.queue(db, member["phone"], alert, "alert", at)
+        send_text(db, member["phone"], alert, "alert", at)
     mail.send(f"Scam Check: {target['name']} got a real scam text", alert)
-    store.queue(
+    send_text(
         db, target["phone"],
         f"Scam Check: thank you {target['name']}, that one was NOT from us, so it is probably a real scam. "
         f"Don't reply or tap anything. {target['grandchild']} has been told and will call you.",

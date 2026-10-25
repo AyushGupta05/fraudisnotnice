@@ -267,4 +267,4 @@ def reveal(code):
 if __name__ == "__main__":
     if TOKEN == "dev-token":
         print("Using the default token. Set SCAMCHECK_TOKEN in .env before exposing this server.")
-    app.run(host="127.0.0.1", port=PORT)
+    app.run(host="0.0.0.0", port=PORT)   # reachable from a phone on the same Wi-Fi as well as through the tunnel

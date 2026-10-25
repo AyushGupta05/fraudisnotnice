@@ -27,12 +27,16 @@ if ! grep -q "Registered tunnel connection" tunnel.log; then
   echo "  Switch to your phone's hotspot or another network and run this again."
 fi
 
-.venv/bin/python ../phone/make_shortcuts.py "$BASE_URL" > /dev/null \
-  || echo "  Could not rebuild the shortcuts. Run: python3 phone/make_shortcuts.py $BASE_URL"
+# The phone talks to this Mac by its local name, which stays the same on any Wi-Fi or hotspot you share.
+# Only the links inside drills use the tunnel, because those must work from anyone's phone.
+LOCAL_URL="http://$(scutil --get LocalHostName | tr 'A-Z' 'a-z').local:$PORT"
+.venv/bin/python ../phone/make_shortcuts.py "$LOCAL_URL" > /dev/null \
+  || echo "  Could not rebuild the shortcuts. Run: python3 phone/make_shortcuts.py $LOCAL_URL"
 
 echo
-echo "  Scam Check is reachable at  $BASE_URL"
-echo "  Put that address and the token from .env into the app's Settings."
-echo "  The two shortcuts in ../phone are rebuilt for this address. AirDrop them to the phone if it changed."
+echo "  Drill links use            $BASE_URL"
+echo "  Your phone uses            $LOCAL_URL   (same Wi-Fi or hotspot as this Mac)"
+echo "  Put the second address and the token from .env into the app's Settings."
+echo "  The two shortcuts in ../phone are built for it; import them on the phone once."
 echo
 .venv/bin/python app.py

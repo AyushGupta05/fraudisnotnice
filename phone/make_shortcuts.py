@@ -113,7 +113,7 @@ def pump(base_url, token):
 
 
 def inbound(base_url, token):
-    """Post a received message to the server, then run the pump so any reply goes straight out."""
+    """Post a received message to the server. The server replies by text itself through AWS."""
     return [
         action("is.workflow.actions.downloadurl", UUID=uid(), WFURL=f"{base_url}/inbound", WFHTTPMethod="POST",
                ShowHeaders=True, WFHTTPHeaders=dictionary([("X-Token", text(token))]),
@@ -121,7 +121,6 @@ def inbound(base_url, token):
                    ("from", text(reference=shortcut_input("Sender"))),
                    ("body", text(reference=shortcut_input())),
                ])),
-        action("is.workflow.actions.runworkflow", WFWorkflowName=PUMP, WFShowWorkflow=False),
     ]
 
 
